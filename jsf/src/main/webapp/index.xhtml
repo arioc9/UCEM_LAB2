@@ -1,0 +1,132 @@
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:h="http://java.sun.com/jsf/html">
+    <h:head>
+        <title>Examen</title>
+    </h:head>
+    <h:body>
+        <h:form id="formprincipal">
+
+            <p:outputLabel for="iteliminar" value="ID a eliminar"/>
+            <p:inputText id="iteliminar" value="#{controlador.eliminarId}" style="width: auto">
+                <p:ajax/>
+            </p:inputText>
+
+            <p:commandButton
+                    value="Buscar"
+                    action="#{controlador.eliminar()}"
+                    process="@this iteliminar"
+                    update="tablapersonas iteliminar">
+            </p:commandButton>
+
+            <div class="card">
+                <p:dataTable id ="tablapersonas" var="Personas" value="#{controlador.listapersonas}">
+
+                    <p:column headerText="Id">
+                        <h:outputText value="#{Personas.id}" />
+                    </p:column>
+
+                    <p:column headerText="Primer Nombre">
+                        <h:outputText value="#{Personas.pnombre}" />
+                    </p:column>
+
+                    <p:column headerText="Segundo Nombre">
+                        <h:outputText value="#{Personas.snombre}" />
+                    </p:column>
+
+                    <p:column headerText="Primer Apellido">
+                        <h:outputText value="#{Personas.papellido}" />
+                    </p:column>
+
+                    <p:column headerText="Segundo Apellido">
+                        <h:outputText value="#{Personas.sapellido}" />
+                    </p:column>
+
+                </p:dataTable>
+            </div>
+
+            <p:spacer height="80"/>
+
+            <div class="card" style="width: 500px">
+                <p:panelGrid columns="2" layout="grid"
+                             contentStyleClass="ui-fluid">
+                    <p:outputLabel for="itpnombre" value="primer nombre"/>
+                    <p:inputText id="itpnombre" value="#{controlador.guardarpersona.pnombre}" style="width: auto">
+                        <p:ajax/>
+                    </p:inputText>
+
+                    <p:outputLabel for="itsnombre" value="segundo nombre"/>
+                    <p:inputText id="itsnombre" value="#{controlador.guardarpersona.snombre}" style="width: auto">
+                        <p:ajax/>
+                    </p:inputText>
+
+                    <p:outputLabel for="itpapellido" value="primer apellido"/>
+                    <p:inputText id="itpapellido" value="#{controlador.guardarpersona.papellido}" style="width: auto">
+                        <p:ajax/>
+                    </p:inputText>
+
+                    <p:outputLabel for="itsapellido" value="segundo apellido"/>
+                    <p:inputText id="itsapellido" value="#{controlador.guardarpersona.sapellido}" style="width: auto">
+                        <p:ajax/>
+                    </p:inputText>
+
+                    <p:commandButton
+                            value="Guardar"
+                            action="#{controlador.guardar}"
+                            process="@this itpnombre itsnombre itpapellido itsapellido"
+                            update="tablapersonas">
+                    </p:commandButton>
+
+                </p:panelGrid>
+            </div>
+
+
+            <p:spacer height="80"/>
+
+            <div class="card" style="width: 500px">
+
+                <p:outputLabel for="itbuscar" value="ID a buscar"/>
+                <p:inputText id="itbuscar" value="#{controlador.buscarId}" style="width: auto">
+                    <p:ajax/>
+                </p:inputText>
+
+                <p:commandButton
+                        value="Buscar"
+                        action="#{controlador.buscar()}"
+                        process="@this itbuscar itpnombreB itsnombreB itpapellidoB itsapellidoB"
+                        update="itpnombreB itsnombreB itpapellidoB itsapellidoB">
+                </p:commandButton>
+
+                <p:panelGrid columns="2" layout="grid"
+                             contentStyleClass="ui-fluid">
+                    <p:outputLabel for="itpnombreB" value="primer nombre"/>
+                    <p:inputText id="itpnombreB" value="#{controlador.buscarpersona.pnombre}" style="width: auto" readonly="true">
+                        <p:ajax/>
+                    </p:inputText>
+
+                    <p:outputLabel for="itsnombreB" value="segundo nombre"/>
+                    <p:inputText id="itsnombreB" value="#{controlador.buscarpersona.snombre}" style="width: auto" readonly="true">
+                        <p:ajax/>
+                    </p:inputText>
+
+                    <p:outputLabel for="itpapellidoB" value="primer apellido"/>
+                    <p:inputText id="itpapellidoB" value="#{controlador.buscarpersona.papellido}" style="width: auto" readonly="true">
+                        <p:ajax/>
+                    </p:inputText>
+
+                    <p:outputLabel for="itsapellidoB" value="segundo apellido"/>
+                    <p:inputText id="itsapellidoB" value="#{controlador.buscarpersona.sapellido}" style="width: auto" readonly="true">
+                        <p:ajax/>
+                    </p:inputText>
+
+
+
+                </p:panelGrid>
+            </div>
+
+        </h:form>
+
+    </h:body>
+</f:view>
+
